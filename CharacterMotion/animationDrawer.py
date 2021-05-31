@@ -84,7 +84,6 @@ class AnimationDrawer:
     def addToPath(self, position):
         if (self.pathLength >= len(self.points)): self.points.append(p.createMultiBody(0, baseVisualShapeIndex=self.sphereShape))
         p.resetBasePositionAndOrientation(self.points[self.pathLength], (position[0], position[1], 0.1), (0,0,0,1))
-        #p.addUserDebugLine((self.prevLinePos[0], self.prevLinePos[1], 0.1), (position[0], position[1], 0.1), [1,0,0], 5, replaceItemUniqueId=self.posLines[self.lineID])
         if (self.pathLength >= len(self.positions)): self.positions.append(position)
         else: self.positions[self.pathLength] = position
         self.pathLength += 1
@@ -161,17 +160,6 @@ class AnimationDrawer:
         curr = trajectory.pop(0)
         conversion = helpers.constructInverseMatrix(Vector3(curr[0], curr[1], 0), math.atan2(curr[3], curr[2]))
         return (trajectory, conversion, endOfPath)
-
-        """
-        tClamped = helpers.clamp(t, 0, len(self.path) - 1)
-        currPos = Vector2.fromlist(self.path[tClamped]).Vector3()
-        currDir  = Vector2.fromlist(self.directions[tClamped]).Vector3()
-        conversion = helpers.constructInverseMatrix(currPos, math.atan2(currDir.y, currDir.x))
-        for i in range(t + stepSize, t + (stepSize * 4), stepSize):
-            nextPos = self.path[helpers.clamp(i, 0, len(self.path) - 1)]
-            nextDir = self.directions[helpers.clamp(i, 0, len(self.path) - 1)]
-            trajectory.append((nextPos[0], nextPos[1], nextDir[0], nextDir[1]))
-        return (trajectory, conversion)"""
 
     def update(self, keyEvents, mouseEvents):
         if (p.B3G_ALT in keyEvents and keyEvents[p.B3G_ALT] & p.KEY_WAS_TRIGGERED): self.altDown = True
