@@ -1,0 +1,31 @@
+<html>
+    <body style="background-color:black;">
+        <div style="display:flex; flex-direction:row;">
+            <svg id="svg" width="600" height="400" style="background-color: antiquewhite;">
+                <img id="button_w" src="w.png" style="position:absolute; left:50; top:230; width:50; height:50; opacity:0.5;"/>
+                <img id="button_s" src="s.png" style="position:absolute; left:70; top:290; width:50; height:50; opacity:0.5;"/>
+                <img id="button_a" src="a.png" style="position:absolute; left:10; top:290; width:50; height:50; opacity:0.5;"/>
+                <img id="button_d" src="d.png" style="position:absolute; left:130; top:290; width:50; height:50; opacity:0.5;"/>
+                <img id="button_shift" src="shift.png" style="position:absolute; left:10; top:350; width:100; height:50; opacity:0.5;"/>
+            </svg>
+            <div style="flex-direction: row; width: 600; height: 400; background-color: bisque;">
+                <div style="display: flex; flex-direction: row; margin: 50;">
+                    <p>Movement acceleration: </p>
+                    <input id="slider_max" type="range" min="0" max="100" step="0.1" value="65"/>
+                    <p id="text_max"></p>
+                </div>
+                <div style="display: flex; flex-direction: row; margin: 50;">
+                    <p>Movement damping: </p>
+                    <input id="slider_movement_damping" type="range" min="0" max="100" step="0.1" value="10"/>
+                    <p id="text_movement_damping"></p>
+                </div>
+                <div style="display: flex; flex-direction: row; margin: 50;">
+                    <p>Angular damping: </p>
+                    <input id="slider_angular_damping" type="range" min="0" max="100" step="0.1" value="1.5"/>
+                    <p id="text_angular_damping"></p>
+                </div>
+            </div>
+        </div>
+        <script src="code.js"></script>
+    </body>
+</html>
