@@ -16,14 +16,12 @@ deg2Rad = 0.0174532925
 translationScale = 0.01
 
 def __loadBVH(filepath):
-    #fixRotation = transform.quaternion_from_euler(
     with open(filepath) as f:
         data = Bvh(f.read())
         for i in range(len(data.frames)): # Convert angles to quaternions and change to left-handed system
             frame = data.frames[i]
             newFrame = [float(frame[2]) * translationScale, float(frame[0]) * translationScale, float(frame[1]) * translationScale]
             for j in range(3, len(frame), 3): # ignore first 3 root position values
-                #if (j < 6): rot = transform.quaternion_from_euler(float(frame[j]) * deg2Rad, float(frame[j + 1]) * deg2Rad - 1.570797, float(frame[j + 2]) * deg2Rad + 1.570797, "rzyx")
                 if (j < 6): 
                     rot = transform.quaternion_from_euler(float(frame[j]) * deg2Rad, float(frame[j + 1]) * deg2Rad, float(frame[j + 2]) * deg2Rad, "rzyx")
                     rot = transform.quaternion_multiply(transform.quaternion_from_euler(1.570797, 0, 1.570797), rot)
@@ -68,7 +66,6 @@ def loadAnimations(fromJSON):
     animations = []
     (_, _, filenames) = next(os.walk(path))
     for filename in filenames:
-        #if (filename.__contains__(".txt" if fromJSON else ".bvh") and filename.__contains__("test")):
         if (filename.__contains__(".txt" if fromJSON else ".bvh") and any(filename.__contains__(anim) for anim in animationNames)):
             animations.append(loadAnimation(path + "/" + filename))
     return animations
@@ -139,7 +136,6 @@ def __constructWorld2CharacterSpaces():
     animCount = 1
     animation = animator.getAnimation()
     animation.conversionMatrix.clear()
-    #fwd = p.addUserDebugLine([0,0,0],[0,0,0])
     while (p.isConnected()):
         frameNum += 1
         env.stepSimulation(False)
@@ -147,7 +143,6 @@ def __constructWorld2CharacterSpaces():
         kinModel.stepCharacter(frameTime)
         centerOfMass = kinModel.getCenterOfMass()
         charForward = kinModel.forward
-        #p.addUserDebugLine([centerOfMass.x, centerOfMass.y, centerOfMass.z], [centerOfMass.x + charForward.x, centerOfMass.y + charForward.y, centerOfMass.z], [1,0,0], 3.0, replaceItemUniqueId=fwd)
         charAngle = math.atan2(charForward.y, charForward.x)
         animation.conversionMatrix.append(helpers.constructInverseMatrix(centerOfMass, charAngle).tolist())
         if (frameNum >= animation.frameCount): # next animation
