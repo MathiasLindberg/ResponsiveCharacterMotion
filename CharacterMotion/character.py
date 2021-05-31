@@ -239,19 +239,3 @@ class Character():
             p.resetBasePositionAndOrientation(self.obbPoints[boxID][3], self.obbPositions[boxID][3], [0, 0, 0, 1])
             p.resetBasePositionAndOrientation(self.obbPoints[boxID][4], self.obbPositions[boxID][4], [0, 0, 0, 1])
             p.resetBasePositionAndOrientation(self.obbPoints[boxID][5], self.obbPositions[boxID][5], [0, 0, 0, 1])
-    """first = True
-    headPoint = -1
-    headLine = -1
-    def test(self):
-        if (self.first):
-            shape = p.createVisualShape(p.GEOM_SPHERE, radius=0.1, rgbaColor=[1,1,0,1])
-            self.headPoint = p.createMultiBody(0, baseVisualShapeIndex=shape)
-            self.headLine = p.addUserDebugLine([0,0,0], [0,0,0])
-            p.setJointMotorControl2(self.id, self.jointIDs["Head"], p.VELOCITY_CONTROL, targetVelocity=1, force=10)
-            self.first = False
-        vals = p.getLinkState(self.id, self.jointIDs["Head"], computeLinkVelocity=True)
-        pos = vals[4]
-        vel = vals[6]
-        print(vel)
-        p.resetBasePositionAndOrientation(self.headPoint, pos, [0,0,0,1])
-        p.addUserDebugLine(pos, [pos[0] + vel[0], pos[1] + vel[1], pos[2] + vel[2]], [1,1,0], 5, replaceItemUniqueId=self.headLine)"""
