@@ -10,9 +10,9 @@ There are 4 sub-projects included in this repo:
 <h2>Installation</h2>
 
 <h2>Inputs in CharacterMotionEnv</h2>
-<b>Moving camera:</b>
-<b>Drawing path:</b>
-<b>Movement settings:</b>
+<b>Moving camera:</b> <br/>
+<b>Drawing path:</b> <br/>
+<b>Movement settings:</b> <br/>
 
 <h2>Training and testing in CharacterMotionEnv</h2>
 <b>Training a model:</b>
