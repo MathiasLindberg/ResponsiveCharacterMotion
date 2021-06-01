@@ -112,17 +112,13 @@ class Controller():
 
     def __updateCamera(self):
         camInfo = p.getDebugVisualizerCamera() # width, height, view, projection, up, forward, horizontal, vertical, yaw, pitch, dist, target
-        #p.resetDebugVisualizerCamera(3, camInfo[8], camInfo[9], (self.position.Vector3() + Vector3.up()).tolist()) # update camera to target player's current location
         p.resetDebugVisualizerCamera(3, camInfo[8], camInfo[9], self.character.position.tolist()) # update camera to target player's current location
         forward = Vector3.fromlist(camInfo[5])
         right = forward.cross(Vector3.fromlist(camInfo[4]))
         self.desiredForward = forward.Vector2().normalize()
         self.desiredRight = right.Vector2().normalize()
         self.desiredRot = camInfo[8]
-        #if (self.debug):
-            #p.addUserDebugLine(self.position, [self.position[0] + self.camForward[0], self.position[1] + self.camForward[1], self.position[2]], [0, 1.0, 0], 2.0, replaceItemUniqueId=self.debugCamForwardLine)
-            #p.addUserDebugLine(self.position, [self.position[0] + self.charForward[0], self.position[1] + self.charForward[1], self.position[2]], [1.0, 0, 0], 2.0, replaceItemUniqueId=self.debugCharForwardLine)
-
+        
     def __move(self, env):
         deltaTime = env.globalTime - self.lastUpdate
         if (self.moving): 
@@ -147,13 +143,8 @@ class Controller():
                 if (self.debug): 
                     p.resetBasePositionAndOrientation(self.debugTrajectoryPoints[i], newPos.Vector3().tolist(), [0,0,0,1])
                     p.addUserDebugLine(newPos.Vector3().tolist(), (newPos + newForward).Vector3().tolist(), [0, 1.0, 0], 0.2, replaceItemUniqueId=self.debugTrajectoryForwards[i])
-                #angle = math.atan2(newForward.y, newForward.x) - math.atan2(self.charForward.y, self.charForward.x)
-                #relPos = helpers.rotateBy(newPos - self.position, -self.currRot * deg2Rad - 1.570797)
                 self.trajectory.append((newPos.x, newPos.y, newForward.x, newForward.y))
         
-        #self.character.setPosition(self.position)
-        #self.character.setOrientation(p.getQuaternionFromEuler([0, 0, self.currRot * deg2Rad]))
-        #p.resetBasePositionAndOrientation(self.character.id, self.position, p.getQuaternionFromEuler([0.0, -1.57, self.currRot * deg2Rad]))
         self.lastUpdate = env.globalTime
 
     def update(self, env):
@@ -167,7 +158,6 @@ class Controller():
         
     def takeRandomAction(self):
         choice = self.rng.integers(0, 3, 1)[0]
-        #print("Random: ")
         if (choice == 0): # desired movement direction
             direction = self.rng.integers(0, 8, 1)[0]
             self.moveForward = False
@@ -175,39 +165,29 @@ class Controller():
             self.moveLeft = False
             self.moveRight = False
             if (direction == 0): # forward
-                #print("Move forward")
                 self.moveForward = True
             elif (direction == 1): # backwards
-                #print("Move backwards")
                 self.moveBackwards = True
             elif (direction == 2): # left
-                #print("Move left")
                 self.moveLeft = True
             elif (direction == 3): # right
-                #print("Move right")
                 self.moveRight = True
             elif (direction == 4): # forward left
-                #print("Move forward left")
                 self.moveForward = True
                 self.moveLeft = True
             elif (direction == 5): # forward right
-                #print("Move forward right")
                 self.moveForward = True
                 self.moveRight = True
             elif (direction == 6): # backwards left
-                #print("Move backwards left")
                 self.moveBackwards = True
                 self.moveLeft = True
             elif (direction == 7): # backwards right
-                #print("Move backwards right")
                 self.moveBackwards = True
                 self.moveRight = True
         elif (choice == 1): # desired facing direction
             self.desiredRot = self.rng.random() * 2.0 * math.pi
-            #print("face angle " + str(self.desiredRot))
         elif (choice == 2): # movement style: walk, run
             self.movementSpeed = self.walkSpeed if (self.rng.random() > 0.5) else self.runSpeed
-            #print("Movement speed " + str(self.movementSpeed))
         self.moving = self.moveForward or self.moveBackwards or self.moveLeft or self.moveRight
         self.desiredForward = Vector2(math.cos(self.desiredRot + 1.570797), math.sin(self.desiredRot + 1.570797))
         self.desiredRight = Vector2(math.cos(self.desiredRot), math.sin(self.desiredRot))
