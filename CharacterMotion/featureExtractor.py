@@ -50,7 +50,6 @@ def extract():
         kinModel.stepCharacter(frameTime)
         frameTimes.append(frameTime)
         pose = kinModel.poseInfo
-        #poseFeatures = helpers.extractPoseFeatures(pose, prevPose, animation.frameTime)
         conversion = np.array(animator.getWorldToCharMatrix(frameNum - 1))
         prevConversion = np.array(animator.getWorldToCharMatrix(max(frameNum - 2, 0)))
         leftFootPos = conversion.dot(vec3To4List(pose[2]))
@@ -168,7 +167,6 @@ def visualize():
             fromP = Vector2(feature[ind], feature[ind + 1])
             toP = fromP + nextFwd
             p.addUserDebugLine([fromP.x, fromP.y, centerOfMass.z], [toP.x, toP.y, centerOfMass.z], [0, 1, 0], 2.0, replaceItemUniqueId=trajectory[i + 1])
-        #conversion = transform.inverse_matrix(np.array(animator.getWorldToCharMatrix(animator.animationElapsedTime)))
         leftFootPos = Vector3(feature[0], feature[1], feature[2])
         rightFootPos = Vector3(feature[3], feature[4], feature[5])
         leftFootVelEnd = leftFootPos + Vector3(feature[6], feature[7], feature[8])
@@ -178,7 +176,6 @@ def visualize():
 
         p.addUserDebugLine(leftFootPos.tolist(), leftFootVelEnd.tolist(), [0, 1, 1], 2.0, replaceItemUniqueId=feet[2])
         p.addUserDebugLine(rightFootPos.tolist(), rightFootVelEnd.tolist(), [0, 1, 1], 2.0, replaceItemUniqueId=feet[3])
-        #p.addUserDebugLine(poseFeatures[1].tolist(), (poseFeatures[1] + Vector3(feature[12], feature[13], feature[14])).tolist(), [1, 0, 0], 2.0, replaceItemUniqueId=hip)
         
         time.sleep(env.timeStep)
 
