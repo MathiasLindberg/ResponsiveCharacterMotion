@@ -36,19 +36,16 @@ class MotionMatchingDB():
         median = self.featureMatrix[featureIDs[medianInd]][dim]
         if (not (len(featureIDs) % 2)): # list is even
             median = (median + self.featureMatrix[featureIDs[medianInd]][dim - 1]) / 2
-        #print("Splitting tree at dimension " + str(dim) + " (median: " + str(median) + ")")
         left = featureIDs[:medianInd]
         right = featureIDs[medianInd:]
         return (median, self.__splitTree(left, dim + 1), self.__splitTree(right, dim + 1))
         
     def searchDBAccelerated(self, featureVector):
-        #searchStart = time.time_ns()
         frameID = self.__searchTree(self.referenceTree, featureVector, 0)
         animID = 0
         for i in range(len(self.animationIDs)):
             if (self.animationIDs[i] > frameID): break
             animID = i
-        #self.timestamps.append(time.time_ns() - searchStart)
         return (self.animationNames[animID], self.frameTimes[frameID], self.featureMatrix[frameID])
 
     def __searchTree(self, tree, featureVector, dim):
@@ -204,7 +201,7 @@ def plotFeatureMagnitudes(m, v, c):
     plt.plot()
     plt.savefig(plotPath + "/search_mags_" + str(plotNum) + ".png", dpi=150)
     print("Saved feature-magnitude plot " + str(plotNum))
-def plotFeatureDistances(m, v, c): # TODO: Change to element-wise distances
+def plotFeatureDistances(m, v, c):
     ids = list(range(m.shape[0]))
     plt.clf()
     plt.scatter(ids[2:], np.sqrt(np.sum(np.square(m[2:] - v), 1)), c="#000000", marker="_")
