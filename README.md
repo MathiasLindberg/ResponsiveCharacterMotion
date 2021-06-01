@@ -1,4 +1,4 @@
-# ResponsiveCharacterMotion
+# Responsive Character Motion
 This repo contains my Master's thesis project <b>Responsive Character Motion</b> <i>(June 1st, 2021)</i>, including motion matching, robot control and reinforcement learning.
 
 There are 4 sub-projects included in this repo:
