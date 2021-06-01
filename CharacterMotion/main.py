@@ -187,8 +187,8 @@ def motionMatch():
     p.addUserDebugLine(targetHipsFromP, targetHipsToP, [0, 1, 1], 2.0, replaceItemUniqueId=targetTrajectory[5])
 
     if (animation == None or animName != animation.name or abs(animTime - (animator.offset + animator.animationElapsedTime)) > 0.2): # do not transit to the frame already being played
-        #animator.playAnimation(env.globalTime, animName, animTime)
-        animator.blendAnimation(env.globalTime, animName, animTime)
+        #animator.playAnimation(env.globalTime, animName, animTime) # no blending
+        animator.blendAnimation(env.globalTime, animName, animTime) # Inertialization blending
     
 
 main()
