@@ -8,7 +8,7 @@ There are 4 sub-projects included in this repo:
 - <b>CharacterMotionEnv</b> is wrapped as a Gym environment, it contains the trianing and testing of PPO on a physics based character, trying to mimick an animated, kinematic character.
 
 <h2>Installation</h2>
-To run the project, you will need to first install Python and a series of Python modules. Installing all of the modules will ensure that you are able to use run every included sub-project, the project is known to work on the specified version. Modules required:
+To run the project, you will first need to install Python and a series of Python modules. Installing all of the modules will ensure that you are able to use run every included sub-project, the project is known to work on the specified version. Modules required:
 
 >>python==3.7.0\
 >>pip==21.0.1\
