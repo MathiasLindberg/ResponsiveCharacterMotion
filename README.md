@@ -61,6 +61,7 @@ To run the project, you will first need to install Python and a series of Python
 <b>Moving camera:</b> Hold down [alt] and left mouse-button down simultaneously, move mouse around. right mouse-button is zoom, middle mouse-button is pan.<br/>
 <b>Drawing path:</b> Left-click with mouse to put down a single point, right-click to clear. Hold down left mouse-button to put down points continuously.<br/>
 <b>Movement settings:</b> You can change the movement speed across the path, the repositioning and the redirectioning speed in the menu to the right, make sure to hold down [alt] while moving the bars, or you might put down points as you interact with the menu.<br/>
+<b>Toggle movement:</b> Click space to start and stop movement after drawing a path. The movement will automatically stop when the end of the trajectory has been reached.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
